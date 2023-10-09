@@ -17,7 +17,8 @@ Search is foundational to any app that surfaces text to users, where common scen
 * Programmability through REST APIs and client libraries in Azure SDKs
 * Azure integration at the data layer, machine learning layer, and AI (Azure AI services)
 
-In our solution we will use Azure Cognitive Search to serve an index of vectorized content, that will be used by our LLM (ChatGPT) to respond to user's query.
+In **our solution** we will use Azure Cognitive Search to serve an index of vectorized content, that will be used by our LLM (ChatGPT) to respond to user's query.
 
 Learn more at the official documentation: [What is Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search).
-Learning Path:[Implement knowledge mining with Azure Cognitive Search - Learning Path](https://learn.microsoft.com/en-us/training/paths/implement-knowledge-mining-azure-cognitive-search/)
+
+Learning Path:[Implement knowledge mining with Azure Cognitive Search](https://learn.microsoft.com/en-us/training/paths/implement-knowledge-mining-azure-cognitive-search/)
