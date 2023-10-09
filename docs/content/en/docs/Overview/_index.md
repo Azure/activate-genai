@@ -39,12 +39,12 @@ This delivery consists of the following steps:
 1. Upload custom data files and perform vector search.
 
 ### Day 3:
-1. Customize the solutions look and feel.
+1. Customize the solution's look and feel.
 1. Extend the solution with prompt engineering and plugins.
 1. Show how the solution scales and integrates with other services.
 1. Show how the security and monitoring works.
 1. Plan the next steps.
 
 ## Closing
-By the end of  the **Activate GenAI with Azure** delivery, stakeholders will have a   powerful and innovative solution that can help them improve their document retrieval efficiency, enhance their user experience, increase their productivity, share their knowledge, gain data insights and analytics, and comply with security standards.ss
+By the end of  the **Activate GenAI with Azure** delivery, stakeholders will have a  powerful and innovative solution that can help them improve their document retrieval efficiency, enhance their user experience, increase their productivity, share their knowledge, gain data insights and analytics, and comply with security standards.ss
 
