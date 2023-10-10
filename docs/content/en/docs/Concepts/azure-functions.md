@@ -2,9 +2,10 @@
 title: Azure Functions
 date: 2023-10-06
 description: >
-  A short lead description about this content page. It can be **bold** or _italic_ and can be split over multiple paragraphs.
+  Serveles application used to bacth-process documents and create embeddings.
 categories: [Azure]
 tags: [docs, functions, serverless]
+weight: 6
 ---
 
 Azure Functions is a serverless solution that allows you to write less code, maintain less infrastructure, and save on costs. Instead of worrying about deploying and maintaining servers, the cloud infrastructure provides all the up-to-date resources needed to keep your applications running.

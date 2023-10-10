@@ -2,9 +2,10 @@
 title: Azure Storage
 date: 2023-10-06
 description: >
-  A short lead description about this content page. It can be **bold** or _italic_ and can be split over multiple paragraphs.
+  Store the documents in Azure Blob Storage.s
 categories: [Azure]
 tags: [docs, storage]
+weight: 7
 ---
 
 Azure Blob Storage is Microsoft's object storage solution for the cloud. Blob Storage is optimized for storing massive amounts of unstructured data. Unstructured data is data that doesn't adhere to a particular data model or definition, such as text or binary data.
