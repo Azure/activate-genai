@@ -14,15 +14,15 @@ description: Understand the supported Scenarios.
 
 ### Azure OpenAI enhanced Monitoring
 
-TODO
+Ensure models are being used responsibly within the corporate environment and within the approved use cases of the service.
 
 **References:**
 
-* [Enterprise Azure OpenA](https://github.com/Azure-Samples/openai-python-enterprise-logging)
+* [Enterprise Azure OpenAI](https://github.com/Azure-Samples/openai-python-enterprise-logging)
 
 ### Load Balance Azure OpenAI instances
 
-TODO
+Enable high availability of the model APIs to ensure user requests are met even if the traffic exceeds the limits of a single Azure OpenAI service.
 
 **References:**
 
@@ -30,7 +30,7 @@ TODO
 
 ### Serverless Document Batch Processing
 
-TODO
+Use Azure Functions to process documents, create embeddings and store them in the specified memory store.  
 
 **References:**
 
