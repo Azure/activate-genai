@@ -1,14 +1,10 @@
 # Activate GenAI with Azure
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+This delivery guide will help you build a ChatGPT-like experiences over your Enterprise data using the Retrieval Augmented Generation pattern. 
 
-As the maintainer of this project, please make a few updates:
+Under the hood the solution uses Azure OpenAI Service to access the ChatGPT model (gpt-35-turbo), and Azure Cognitive Search for data indexing and retrieval.
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+For more information check **[Activate GenAI with Azure](https://azure.github.io/activate-genai)**.
 
 ## Contributing
 
