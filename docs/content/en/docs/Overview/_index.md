@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: Activate GenAI with Azure &mdash; A smart and scalable document retrieval solution"
+description: Activate GenAI with Azure &mdash; A smart and scalable document retrieval solution
 weight: 1
 ---
 
@@ -12,7 +12,7 @@ To use this solution, you will need the following:
 - An Azure subscription
 - A User, Service Principal or Managed Identity with the following permissions:
   - Contributor role on the Azure subscription
-- Azure CLI v2.253.0 or later
+- Azure CLI v2.53.0 or later
 - Terraform v1.6.0 or later
 
 ## Objectives
