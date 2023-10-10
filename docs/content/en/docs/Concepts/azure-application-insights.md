@@ -26,6 +26,6 @@ Application Insights provides **other features** including, but not limited to:
 
 Application Insights supports distributed tracing, which is also known as distributed component correlation. This feature allows searching for and visualizing an end-to-end flow of a specific execution or transaction. The ability to trace activity from end to end is important for applications that were built as distributed components or microservices.
 
-In **our solution** we use Application Insights to monitor metrics and logs of the solution. 
+**Activate GenAI with Azure** uses Application Insights to monitor application logs. 
 
 Learn more about Application Insights in the official documentation: [What is Application Insights?](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net)

@@ -17,6 +17,6 @@ To help developers build their own Copilot experiences on top of AI plugins, we 
 
 ![Image of Semantic Kernel](https://learn.microsoft.com/en-us/semantic-kernel/media/mind-and-body-of-semantic-kernel.png)
 
-In **our solution** we use Semantic Kernel to orchestrate the prompts, Azure OpenAI calls and Azure Cognitive Search queries and results.
+**Activate GenAI with Azure** uses Semantic Kernel to orchestrate the prompts, Azure OpenAI calls and Azure Cognitive Search queries and results.
 
 Learn more at the official documentation of [Semantic Kernel](https://learn.microsoft.com/en-us/semantic-kernel/overview/)

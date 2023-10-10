@@ -11,6 +11,6 @@ Azure API Management is a platform-as-a-service that provides a hybrid, multiclo
 
 ![APIM imagen](https://learn.microsoft.com/en-us/azure/api-management/media/api-management-key-concepts-experiment/api-management-components.png)
 
-In **our solution** we use API Management to manage exposed endpoints, for example, Azure OpenAI, Azure Function and Azure Cognitive Search index. 
+**Activate GenAI with Azure** uses API Management to manage exposed endpoints, for example, Azure OpenAI, Azure Function and Azure Cognitive Search index. 
 
 More information at the offical documentation: [What is APIM?](https://learn.microsoft.com/en-us/azure/api-management/api-management-key-concepts)

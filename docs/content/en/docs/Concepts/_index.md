@@ -2,5 +2,5 @@
 title: Concepts
 weight: 4
 description: >
-  Understand the core components of the soltion: Azure Open AI, Azure Cognitive Search, Azure APIM and more.
+  Understand the core components of the solution: Azure Open AI, Azure Cognitive Search, Azure APIM and more.
 ---
