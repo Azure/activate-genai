@@ -7,7 +7,7 @@ description: This guide provides details and instructions to help you deploy the
 
 The following diagram shows the high-level architecture of the **Activate GenAI with Azure** Accelerator:
 
-![High-level Architecture](../../../../static/img/ActivateGenAI-HLD.png)
+![High-level Architecture](activate-genai/img/ActivateGenAI-HLD.png)
 
 
 
