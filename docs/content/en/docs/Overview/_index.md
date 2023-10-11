@@ -15,6 +15,12 @@ To use this solution, you will need the following:
 - Azure CLI v2.53.0 or later
 - Terraform v1.6.0 or later
 
+## High-level Architecture
+
+The following diagram shows the high-level architecture of the **Activate GenAI with Azure** solution:
+
+![High-level Architecture](../../../../static/img/ActivateGenAI-HLD.png)
+
 ## Objectives
 By the end of this delivery, you will be able to:
 - Configure and deploy the **Activate GenAI with Azure** solution
