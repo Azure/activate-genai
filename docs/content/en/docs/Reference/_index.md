@@ -14,7 +14,7 @@ weight: 9
 
 * [Load Balancing in Azure OpenAI Service](https://journeyofthegeek.com/2023/05/31/load-balancing-in-azure-openai-service/)
 * [Granular Chargebacks in Azure OpenAI Service](https://journeyofthegeek.com/2023/05/18/granular-chargebacks-in-azure-openai-service/)
-* [Enterprise Azure OpenA](https://github.com/Azure-Samples/openai-python-enterprise-logging)
+* [Enterprise Azure OpenAI](https://github.com/Azure-Samples/openai-python-enterprise-logging)
 
 ## Azure Services
 
