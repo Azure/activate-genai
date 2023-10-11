@@ -19,7 +19,7 @@ To use this solution, you will need the following:
 
 The following diagram shows the high-level architecture of the **Activate GenAI with Azure** solution:
 
-![High-level Architecture](activate-genai/img/ActivateGenAI-HLD.png)
+![High-level Architecture](/activate-genai/img/ActivateGenAI-HLD.png)
 
 ## Objectives
 By the end of this delivery, you will be able to:
