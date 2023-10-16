@@ -169,7 +169,7 @@ enable = false
 [[params.links.developer]]
   name = "GitHub"
   url = "https://github.com/azure/activate-genai"
-  icon = "fab fa-github"
+  icon = "fab fa-microsoft"
   desc = "Development takes place here!"
 
 # hugo module configuration
