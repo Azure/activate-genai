@@ -167,10 +167,10 @@ enable = false
 [params.links]
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
-  name = "GitHub"
+  name = "Microsoft - Activate GenAI with Azure"
   url = "https://github.com/azure/activate-genai"
   icon = "fab fa-microsoft"
-  desc = "Development takes place here!"
+  desc = ""
 
 # hugo module configuration
 
