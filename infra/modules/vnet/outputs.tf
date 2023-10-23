@@ -9,3 +9,7 @@ output "apim_subnet_id" {
 output "cae_subnet_id" {
   value = azurerm_subnet.cae.id
 }
+
+output "pe_subnet_id" {
+  value = azurerm_subnet.private_endpoints.id
+}

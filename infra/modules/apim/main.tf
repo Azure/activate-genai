@@ -1,4 +1,5 @@
 resource "azurerm_api_management" "apim" {
+  count                = var.enable_apim ? 1 : 0
   name                 = var.apim_name
   location             = var.location
   resource_group_name  = var.resource_group_name
