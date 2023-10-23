@@ -15,3 +15,5 @@ variable "chat_gpt_model" {}
 variable "embeddings_deployment" {}
 variable "embeddings_model" {}
 variable "openai_service_name" {}
+
+variable "enable_entra_id_authentication" {}

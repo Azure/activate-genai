@@ -14,7 +14,12 @@ resource "azapi_resource" "ca_back" {
     properties : {
       managedEnvironmentId = "${var.cae_id}"
       configuration = {
-        secrets = []
+        secrets = [
+          {
+            name  = "microsoft-provider-authentication-secret"
+            value = "${var.enable_entra_id_authentication ? module.sp[0].password : "None"}"
+          }
+        ]
         ingress = {
           external   = true
           targetPort = 50505

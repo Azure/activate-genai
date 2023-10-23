@@ -4,3 +4,5 @@ variable "apim_name" {}
 variable "publisher_name" {}
 variable "publisher_email" {}
 variable "apim_subnet_id" {}
+
+variable "enable_apim" {}

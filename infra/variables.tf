@@ -34,6 +34,10 @@ variable "apim_name" {
   default = "apim-activate-genai"
 }
 
+variable "appi_name" {
+  default = "appi-activate-genai"
+}
+
 variable "publisher_name" {
   default = "contoso"
 }
@@ -63,4 +67,12 @@ variable "ca_webapi_name" {
 
 variable "ca_webapp_name" {
   default = "ca-webapp-activate-genai"
+}
+
+variable "enable_entra_id_authentication" {
+  default = false
+}
+
+variable "enable_apim" {
+  default = false
 }

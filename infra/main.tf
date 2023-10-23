@@ -21,6 +21,18 @@ module "vnet" {
   virtual_network_name = var.virtual_network_name
 }
 
+module "nsg" {
+  source              = "./modules/nsg"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  nsg_apim_name       = "nsg-apim"
+  apim_subnet_id      = module.vnet.apim_subnet_id
+  nsg_cae_name        = "nsg-cae"
+  cae_subnet_id       = module.vnet.cae_subnet_id
+  nsg_pe_name         = "nsg-pe"
+  pe_subnet_id        = module.vnet.pe_subnet_id
+}
+
 module "apim" {
   source              = "./modules/apim"
   location            = azurerm_resource_group.rg.location
@@ -29,6 +41,9 @@ module "apim" {
   apim_subnet_id      = module.vnet.apim_subnet_id
   publisher_name      = var.publisher_name
   publisher_email     = var.publisher_email
+  enable_apim         = var.enable_apim
+
+  depends_on = [module.nsg]
 }
 
 module "mi" {
@@ -70,7 +85,7 @@ module "appi" {
   source              = "./modules/appi"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  appi_name           = var.apim_name
+  appi_name           = var.appi_name
   log_id              = module.log.log_id
 }
 
@@ -103,23 +118,24 @@ module "cae" {
 }
 
 module "ca_back" {
-  source                     = "./modules/ca-back"
-  location                   = azurerm_resource_group.rg.location
-  resource_group_id          = azurerm_resource_group.rg.id
-  ca_name                    = var.ca_back_name
-  cae_id                     = module.cae.cae_id
-  managed_identity_id        = module.mi.mi_id
-  chat_gpt_deployment        = module.openai.gpt_deployment_name
-  chat_gpt_model             = module.openai.gpt_deployment_name
-  embeddings_deployment      = module.openai.embedding_deployment_name
-  embeddings_model           = module.openai.embedding_deployment_name
-  storage_account_name       = module.st.storage_account_name
-  storage_container_name     = module.st.storage_container_name
-  search_service_name        = module.search.search_service_name
-  search_index_name          = module.search.search_index_name
-  openai_service_name        = module.openai.openai_service_name
-  tenant_id                  = data.azurerm_subscription.current.tenant_id
-  managed_identity_client_id = module.mi.client_id
+  source                         = "./modules/ca-back"
+  location                       = azurerm_resource_group.rg.location
+  resource_group_id              = azurerm_resource_group.rg.id
+  ca_name                        = var.ca_back_name
+  cae_id                         = module.cae.cae_id
+  managed_identity_id            = module.mi.mi_id
+  chat_gpt_deployment            = module.openai.gpt_deployment_name
+  chat_gpt_model                 = module.openai.gpt_deployment_name
+  embeddings_deployment          = module.openai.embedding_deployment_name
+  embeddings_model               = module.openai.embedding_deployment_name
+  storage_account_name           = module.st.storage_account_name
+  storage_container_name         = module.st.storage_container_name
+  search_service_name            = module.search.search_service_name
+  search_index_name              = module.search.search_index_name
+  openai_service_name            = module.openai.openai_service_name
+  tenant_id                      = data.azurerm_subscription.current.tenant_id
+  managed_identity_client_id     = module.mi.client_id
+  enable_entra_id_authentication = var.enable_entra_id_authentication
 }
 
 # module "ca_webapi" {
