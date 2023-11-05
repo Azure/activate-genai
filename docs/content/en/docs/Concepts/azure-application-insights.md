@@ -29,4 +29,4 @@ Application Insights supports distributed tracing, which is also known as distri
 
 **Activate GenAI with Azure** uses Application Insights to monitor application logs. 
 
-Learn more about Application Insights in the official documentation: [What is Application Insights?](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net)
+For more information check: [What is Application Insights?](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net)

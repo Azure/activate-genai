@@ -26,4 +26,4 @@ Important concepts about Azure OpenAI:
 
 **Activate GenAI with Azure** uses Azure OpenAI Embeddings model to vectorize the content and ChatGPT model to conversate with that content. 
 
-More information at the official documentation: [What is Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview)
+For more information check: [What is Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview)

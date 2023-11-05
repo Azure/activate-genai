@@ -14,4 +14,4 @@ Functions provides a comprehensive set of event-driven triggers and bindings tha
 
 **Activate GenAI with Azure** uses Azure Function to create chunks of the documents text and create embeddings to be added to the Azure Cognitive Search index. 
 
-Learn more about Azure Functions: [What is Azure Function?](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview?pivots=programming-language-csharp). For the best experience with the Functions documentation, choose your preferred development language from the list of native Functions languages at the top of the article.
+For more information check: [What is Azure Function?](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview?pivots=programming-language-csharp). For the best experience with the Functions documentation, choose your preferred development language from the list of native Functions languages at the top of the article.

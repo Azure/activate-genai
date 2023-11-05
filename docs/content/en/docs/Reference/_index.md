@@ -23,4 +23,4 @@ weight: 9
 * [Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/overview)
 * [Azure API Management](https://learn.microsoft.com/en-us/azure/api-management/api-management-key-concepts)
 * [Azure Application Insights](hhttps://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net)
-* [Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/whatis)
+* [Microsoft Entra ID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/whatis)

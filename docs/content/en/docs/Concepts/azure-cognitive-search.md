@@ -22,6 +22,6 @@ Search is foundational to any app that surfaces text to users, where common scen
 
 **Activate GenAI with Azure** uses Azure Cognitive Search to serve an index of vectorized content, that will be used by our LLM (ChatGPT) to respond to user's query.
 
-Learn more at the official documentation: [What is Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search).
+For more information check: [What is Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search).
 
 Learning Path:[Implement knowledge mining with Azure Cognitive Search](https://learn.microsoft.com/en-us/training/paths/implement-knowledge-mining-azure-cognitive-search/)

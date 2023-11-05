@@ -8,7 +8,7 @@ description: Understand the supported Scenarios.
 
 ### Document Retrieval
 
-**Activate GenAI with Azure** is a new delivery that leverages the power of artificial intelligence and cloud computing to provide a smart and scalable document retrieval solution. The solution uses Azure OpenAI, Cognitive Search, Container Apps, Application Insights, and Azure API Management to create a chat interface that can answer user queries with relevant documents, suggested follow-up questions, and citations. The solution also allows users to upload custom data files and perform vector search using semantic or hybrid methods. Additionally, the solution supports extensibility through plugins, charge back functionality, security features such as authentication and authorization, monitoring capabilities, and scalability options.
+**Activate GenAI with Azure** is a new delivery that leverages the power of artificial intelligence and cloud computing to provide a smart and scalable document search and retrieval solution. The solution uses Azure OpenAI, Cognitive Search, Container Apps, Application Insights, and Azure API Management to create a chat interface that can answer user queries with relevant documents, suggested follow-up questions, and citations. The solution also allows users to upload custom data files and perform vector search using semantic or hybrid methods. Additionally, the solution supports extensibility through plugins, charge back functionality, security features such as authentication and authorization, monitoring capabilities, and scalability options.
 
 ## Technical Scenarios
 
