@@ -28,6 +28,18 @@ resource "azurerm_network_security_group" "nsg_apim" {
   }
 
   security_rule {
+    name                       = "allowanyhttpsinbound"
+    priority                   = 310
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "VirtualNetwork"
+  }
+
+  security_rule {
     name                       = "dependency-on-storage"
     priority                   = 100
     direction                  = "Outbound"

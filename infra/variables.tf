@@ -30,6 +30,10 @@ variable "storage_account_name" {
   default = "stgenai"
 }
 
+variable "eventhub_name" {
+  default = "evh-activate-genai"
+}
+
 variable "apim_name" {
   default = "apim-activate-genai"
 }

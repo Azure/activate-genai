@@ -33,15 +33,29 @@ module "nsg" {
   pe_subnet_id        = module.vnet.pe_subnet_id
 }
 
-module "apim" {
-  source              = "./modules/apim"
+module "evh" {
+  source              = "./modules/evh"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  apim_name           = var.apim_name
-  apim_subnet_id      = module.vnet.apim_subnet_id
-  publisher_name      = var.publisher_name
-  publisher_email     = var.publisher_email
+  eventhub_name       = var.eventhub_name
   enable_apim         = var.enable_apim
+}
+
+module "apim" {
+  source                     = "./modules/apim"
+  location                   = azurerm_resource_group.rg.location
+  resource_group_name        = azurerm_resource_group.rg.name
+  apim_name                  = var.apim_name
+  apim_subnet_id             = module.vnet.apim_subnet_id
+  publisher_name             = var.publisher_name
+  publisher_email            = var.publisher_email
+  enable_apim                = var.enable_apim
+  eventhub_id                = module.evh.eventhub_id
+  eventhub_name              = module.evh.eventhub_name
+  eventhub_connection_string = module.evh.eventhub_connection_string
+  openai_service_name        = module.openai.openai_service_name
+  openai_service_endpoint    = module.openai.openai_endpoint
+  tenant_id                  = data.azurerm_subscription.current.tenant_id
 
   depends_on = [module.nsg]
 }
@@ -132,7 +146,7 @@ module "ca_back" {
   storage_container_name         = module.st.storage_container_name
   search_service_name            = module.search.search_service_name
   search_index_name              = module.search.search_index_name
-  openai_service_name            = module.openai.openai_service_name
+  openai_service_name            = var.enable_apim ? module.apim.gateway_url : module.openai.openai_endpoint
   tenant_id                      = data.azurerm_subscription.current.tenant_id
   managed_identity_client_id     = module.mi.client_id
   enable_entra_id_authentication = var.enable_entra_id_authentication

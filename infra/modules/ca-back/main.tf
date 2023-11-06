@@ -40,7 +40,7 @@ resource "azapi_resource" "ca_back" {
         containers = [
           {
             name  = "azseachopenai"
-            image = "cmendibl3/azseachopenai"
+            image = "cmendibl3/azseachopenai:0.1.0"
             resources = {
               cpu    = 0.5
               memory = "1Gi"
