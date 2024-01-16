@@ -1,5 +1,6 @@
 locals {
-  logger_name = "openai-logger"
+  logger_name = "openai-appi-logger"
+  backend_url = "${var.openai_service_endpoint}openai"
 }
 
 resource "azurerm_api_management" "apim" {
@@ -17,17 +18,29 @@ resource "azurerm_api_management" "apim" {
   }
 }
 
+resource "azurerm_api_management_backend" "openai" {
+  count               = var.enable_apim ? 1 : 0
+  name                = "openai-api"
+  resource_group_name = var.resource_group_name
+  api_management_name = azurerm_api_management.apim[0].name
+  protocol            = "http"
+  url                 = local.backend_url
+  tls {
+    validate_certificate_chain = true
+    validate_certificate_name  = true
+  }
+}
+
 // TODO: https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-log-event-hubs?tabs=bicep#logger-with-system-assigned-managed-identity-credentialss
-resource "azurerm_api_management_logger" "logger" {
+resource "azurerm_api_management_logger" "appi_logger" {
   count               = var.enable_apim ? 1 : 0
   name                = local.logger_name
   api_management_name = azurerm_api_management.apim[0].name
   resource_group_name = var.resource_group_name
-  resource_id         = var.eventhub_id
+  resource_id         = var.appi_resource_id
 
-  eventhub {
-    name              = var.eventhub_name
-    connection_string = var.eventhub_connection_string
+  application_insights {
+    instrumentation_key = var.appi_instrumentation_key
   }
 }
 
@@ -42,10 +55,11 @@ resource "azurerm_api_management_api" "openai" {
   path                  = "openai"
   protocols             = ["https"]
   subscription_required = false
+  service_url           = local.backend_url
 
   import {
-    content_format = "openapi"
-    content_value  = replace(replace(file("${path.module}/azure_openai.json"), "{endpoint}", var.openai_service_endpoint), "{servicename}", var.openai_service_name)
+    content_format = "openapi-link"
+    content_value  = "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/cognitiveservices/data-plane/AzureOpenAI/inference/stable/2023-05-15/inference.json"
   }
 }
 
@@ -58,25 +72,6 @@ resource "azurerm_api_management_named_value" "tenant_id" {
   value               = var.tenant_id
 }
 
-resource "azurerm_api_management_named_value" "logger_compliance" {
-  count               = var.enable_apim ? 1 : 0
-  name                = "logger-compliance"
-  resource_group_name = var.resource_group_name
-  api_management_name = azurerm_api_management.apim[0].name
-  display_name        = "YOUR_LOGGER_COMPLIANCE"
-  value               = local.logger_name
-}
-
-resource "azurerm_api_management_named_value" "logger_chargeback" {
-  count               = var.enable_apim ? 1 : 0
-  name                = "logger-chargeback"
-  resource_group_name = var.resource_group_name
-  api_management_name = azurerm_api_management.apim[0].name
-  display_name        = "YOUR_LOGGER_CHARGEBACK"
-  value               = local.logger_name
-}
-
-// https://github.com/mattfeltonma/azure-openai-apim/blob/main/apim-policies/apim-policy-event-hub-logging.xml
 resource "azurerm_api_management_api_policy" "policy" {
   count               = var.enable_apim ? 1 : 0
   api_name            = azurerm_api_management_api.openai[0].name
@@ -84,19 +79,6 @@ resource "azurerm_api_management_api_policy" "policy" {
   resource_group_name = var.resource_group_name
 
   xml_content = <<XML
-    <!--
-    This sample policy enforces Azure AD authentication and authorization to the Azure OpenAI Service. 
-    It limits the authorization tokens issued by the organization's tenant for Cognitive Services.
-    The authorization token is passed on to the Azure OpenAI Service ensuring authorization to the actions within
-    the service are limited to the permissions defined in Azure RBAC.
-
-    The sample policy also logs audit information such as the application id making the call, the prompt, the response, 
-    the model used, and the number of tokens consumed. This can be helpful when handling chargebacks. The events are delivered
-    to an Azure Event Hub through the Azure API Management Logger.
-
-    You must provide values for the AZURE_OAI_SERVICE_NAME, TENANT_ID, YOUR_LOGGER_COMPLIANCE, and YOUR_LOGGER_CHARGEBACK a parameters.
-    You can use separate APIM Loggers for compliance and chargeback or the same logger. It is your choice.
-    -->
     <policies>
         <inbound>
             <base />
@@ -111,24 +93,8 @@ resource "azurerm_api_management_api_policy" "policy" {
                     </claim>
                 </required-claims>
             </validate-jwt>
-           
-            <set-variable name="message-id" value="@(Guid.NewGuid())" />
 
-            <log-to-eventhub logger-id="{{YOUR_LOGGER_COMPLIANCE}}" partition-id="0">@{
-                var requestBody = context.Request.Body?.As<JObject>(true);
-
-                string prompt = requestBody["prompt"]?.ToString();
-                string messages = requestBody["messages"]?.ToString();
-
-                return new JObject(
-                    new JProperty("event-time", DateTime.UtcNow.ToString()),
-                    new JProperty("message-id", context.Variables["message-id"]),
-                    new JProperty("appid", context.Request.Headers.GetValueOrDefault("Authorization",string.Empty).Split(' ').Last().AsJwt().Claims.GetValueOrDefault("appid", string.Empty)),
-                    new JProperty("operationname", context.Operation.Id),
-                    new JProperty("prompt", prompt),
-                    new JProperty("messages", messages)
-                ).ToString();
-            }</log-to-eventhub>
+            <set-backend-service backend-id="openai-api" />
         </inbound>
         <backend>
           <base />
@@ -141,4 +107,48 @@ resource "azurerm_api_management_api_policy" "policy" {
         </on-error>
     </policies>
     XML
+  depends_on  = [azurerm_api_management_backend.openai]
+}
+
+# https://github.com/aavetis/azure-openai-logger/blob/main/README.md
+resource "azurerm_api_management_diagnostic" "diagnostics" {
+  count                    = var.enable_apim ? 1 : 0
+  identifier               = "applicationinsights"
+  resource_group_name      = var.resource_group_name
+  api_management_name      = azurerm_api_management.apim[0].name
+  api_management_logger_id = azurerm_api_management_logger.appi_logger[0].id
+
+  sampling_percentage       = 100
+  always_log_errors         = true
+  log_client_ip             = false
+  verbosity                 = "information"
+  http_correlation_protocol = "W3C"
+
+  frontend_request {
+    body_bytes = 8192
+    headers_to_log = [
+      "custom-headers"
+    ]
+  }
+
+  frontend_response {
+    body_bytes = 8192
+    headers_to_log = [
+      "custom-headers"
+    ]
+  }
+
+  backend_request {
+    body_bytes = 8192
+    headers_to_log = [
+      "custom-headers"
+    ]
+  }
+
+  backend_response {
+    body_bytes = 8192
+    headers_to_log = [
+      "custom-headers"
+    ]
+  }
 }

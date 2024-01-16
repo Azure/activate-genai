@@ -33,29 +33,20 @@ module "nsg" {
   pe_subnet_id        = module.vnet.pe_subnet_id
 }
 
-module "evh" {
-  source              = "./modules/evh"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  eventhub_name       = var.eventhub_name
-  enable_apim         = var.enable_apim
-}
-
 module "apim" {
-  source                     = "./modules/apim"
-  location                   = azurerm_resource_group.rg.location
-  resource_group_name        = azurerm_resource_group.rg.name
-  apim_name                  = var.apim_name
-  apim_subnet_id             = module.vnet.apim_subnet_id
-  publisher_name             = var.publisher_name
-  publisher_email            = var.publisher_email
-  enable_apim                = var.enable_apim
-  eventhub_id                = module.evh.eventhub_id
-  eventhub_name              = module.evh.eventhub_name
-  eventhub_connection_string = module.evh.eventhub_connection_string
-  openai_service_name        = module.openai.openai_service_name
-  openai_service_endpoint    = module.openai.openai_endpoint
-  tenant_id                  = data.azurerm_subscription.current.tenant_id
+  source                   = "./modules/apim"
+  location                 = azurerm_resource_group.rg.location
+  resource_group_name      = azurerm_resource_group.rg.name
+  apim_name                = var.apim_name
+  apim_subnet_id           = module.vnet.apim_subnet_id
+  publisher_name           = var.publisher_name
+  publisher_email          = var.publisher_email
+  enable_apim              = var.enable_apim
+  appi_resource_id         = module.appi.appi_id
+  appi_instrumentation_key = module.appi.appi_key
+  openai_service_name      = module.openai.openai_service_name
+  openai_service_endpoint  = module.openai.openai_endpoint
+  tenant_id                = data.azurerm_subscription.current.tenant_id
 
   depends_on = [module.nsg]
 }
