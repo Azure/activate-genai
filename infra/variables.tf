@@ -3,11 +3,7 @@ variable "resource_group_name" {
 }
 
 variable "location" {
-  default = "West Europe"
-}
-
-variable "secondary_location" {
-  default = "North Europe"
+  default = "westeurope"
 }
 
 variable "log_name" {
@@ -16,6 +12,22 @@ variable "log_name" {
 
 variable "azopenai_name" {
   default = "cog-openai-activate-genai"
+}
+
+variable "content_safety_name" {
+  default = "cog-content-safety-activate-genai"
+}
+
+variable "cognitive_services_name" {
+  default = "cog-cognitive-activate-genai"
+}
+
+variable "speech_name" {
+  default = "cog-speech-activate-genai"
+}
+
+variable "bing_name" {
+  default = "cog-bing-activate-genai"
 }
 
 variable "search_name" {
@@ -30,10 +42,6 @@ variable "storage_account_name" {
   default = "stgenai"
 }
 
-variable "eventhub_name" {
-  default = "evh-activate-genai"
-}
-
 variable "apim_name" {
   default = "apim-activate-genai"
 }
@@ -45,6 +53,7 @@ variable "appi_name" {
 variable "publisher_name" {
   default = "contoso"
 }
+
 variable "publisher_email" {
   default = "admin@contoso.com"
 }
@@ -61,16 +70,32 @@ variable "cae_name" {
   default = "cae-activate-genai"
 }
 
-variable "ca_back_name" {
-  default = "ca-back-activate-genai"
+variable "ca_chat_name" {
+  default = "ca-chat-activate-genai"
 }
 
-variable "ca_webapi_name" {
-  default = "ca-webapi-activate-genai"
+variable "ca_prep_docs_name" {
+  default = "ca-prep-docs-activate-genai"
 }
 
-variable "ca_webapp_name" {
-  default = "ca-webapp-activate-genai"
+variable "ca_aihub_name" {
+  default = "ca-aihub-activate-genai"
+}
+
+variable "ca_chat_image" {
+  default = "ghcr.io/azure/activate-genai/aihub-chat:1.0.0-preview.0"
+}
+
+variable "ca_prep_docs_image" {
+  default = "ghcr.io/azure/activate-genai/aihub-prepdocs:1.0.0-preview.0"
+}
+
+variable "ca_aihub_image" {
+  default = "ghcr.io/azure/aihub/aihub:1.0.0-preview.0"
+}
+
+variable "use_random_suffix" {
+  default = true
 }
 
 variable "enable_entra_id_authentication" {
@@ -79,4 +104,12 @@ variable "enable_entra_id_authentication" {
 
 variable "enable_apim" {
   default = false
+}
+
+variable "bing_key" {
+  default = "<replace with a valid bing key>"
+}
+
+variable "pbi_report_link" {
+  default = ""
 }

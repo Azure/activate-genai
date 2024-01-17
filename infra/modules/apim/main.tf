@@ -3,6 +3,18 @@ locals {
   backend_url = "${var.openai_service_endpoint}openai"
 }
 
+resource "azurerm_public_ip" "apim_public_ip" {
+  count               = var.enable_apim ? 1 : 0
+  name                = "pip-apim"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+  ip_tags             = {}
+  zones               = ["1", "2", "3"]
+  domain_name_label   = var.apim_name
+}
+
 resource "azurerm_api_management" "apim" {
   count                = var.enable_apim ? 1 : 0
   name                 = var.apim_name
@@ -12,6 +24,7 @@ resource "azurerm_api_management" "apim" {
   publisher_email      = var.publisher_email
   sku_name             = "Developer_1"
   virtual_network_type = "External" # Use "Internal" for a fully private APIM
+  public_ip_address_id = azurerm_public_ip.apim_public_ip[0].id // Required to deploy APIM in STv2 platform
 
   virtual_network_configuration {
     subnet_id = var.apim_subnet_id
@@ -31,7 +44,6 @@ resource "azurerm_api_management_backend" "openai" {
   }
 }
 
-// TODO: https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-log-event-hubs?tabs=bicep#logger-with-system-assigned-managed-identity-credentialss
 resource "azurerm_api_management_logger" "appi_logger" {
   count               = var.enable_apim ? 1 : 0
   name                = local.logger_name

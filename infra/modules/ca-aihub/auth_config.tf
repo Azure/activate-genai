@@ -62,7 +62,6 @@ resource "null_resource" "update_redirect_uris" {
     azapi_resource.current
   ]
   triggers = {
-    input_json                   = md5(local.update_redirect_uris_command)
-    update_redirect_uris_command = local.update_redirect_uris_command
+    always_run = timestamp()
   }
 }

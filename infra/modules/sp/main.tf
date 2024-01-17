@@ -1,5 +1,8 @@
 data "azurerm_client_config" "current" {}
 
+resource "random_uuid" "uuid" {
+}
+
 resource "azuread_application" "sp" {
   display_name    = var.sp_name
   identifier_uris = ["api://${var.sp_name}"]
@@ -22,7 +25,7 @@ resource "azuread_application" "sp" {
       admin_consent_description  = "Allow the application to access example on behalf of the signed-in user."
       admin_consent_display_name = "Allow the application to access example on behalf of the signed-in user."
       enabled                    = true
-      id                         = "96183846-204b-4b43-82e1-5d2222eb4b9b"
+      id                         = random_uuid.uuid.result
       type                       = "User"
       user_consent_description   = "Allow the application to access example on your behalf."
       user_consent_display_name  = "Allow the application to access example on behalf of the signed-in user."

@@ -3,6 +3,7 @@ resource "azurerm_search_service" "search" {
   location            = var.location
   resource_group_name = var.resource_group_name
   sku                 = "standard"
+  semantic_search_sku = "free"
 
   local_authentication_enabled = false
 }

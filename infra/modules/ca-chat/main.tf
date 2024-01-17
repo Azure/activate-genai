@@ -1,4 +1,4 @@
-resource "azapi_resource" "ca_webapi" {
+resource "azapi_resource" "ca_back" {
   name      = var.ca_name
   location  = var.location
   parent_id = var.resource_group_id
@@ -14,10 +14,15 @@ resource "azapi_resource" "ca_webapi" {
     properties : {
       managedEnvironmentId = "${var.cae_id}"
       configuration = {
-        secrets = []
+        secrets = [
+          {
+            name  = "microsoft-provider-authentication-secret"
+            value = "${var.enable_entra_id_authentication ? module.sp[0].password : "None"}"
+          }
+        ]
         ingress = {
           external   = true
-          targetPort = 8080
+          targetPort = 50505
           transport  = "Http"
 
           traffic = [
@@ -26,13 +31,6 @@ resource "azapi_resource" "ca_webapi" {
               weight         = 100
             }
           ]
-          corsPolicy = {
-            allowedOrigins = [
-              "https://${var.ca_webapp_name}.${var.cae_default_domain}"
-            ]
-            allowedHeaders   = ["*"]
-            allowCredentials = false
-          }
         }
         dapr = {
           enabled = false
@@ -41,44 +39,48 @@ resource "azapi_resource" "ca_webapi" {
       template = {
         containers = [
           {
-            name  = "chat-copilot-webapi"
-            image = "cmendibl3/chat-copilot-webapi:0.1.0"
+            name  = "azseachopenai"
+            image = "${var.image_name}"
             resources = {
               cpu    = 0.5
               memory = "1Gi"
             }
             env = [
               {
-                name  = "Authentication__Type"
-                value = "None"
+                name  = "AZURE_STORAGE_ACCOUNT"
+                value = "${var.storage_account_name}"
               },
               {
-                name  = "Planner__Model"
+                name  = "AZURE_STORAGE_CONTAINER"
+                value = "${var.storage_container_name}"
+              },
+              {
+                name  = "AZURE_SEARCH_SERVICE"
+                value = "${var.search_service_name}"
+              },
+              {
+                name  = "AZURE_SEARCH_INDEX"
+                value = "${var.search_index_name}"
+              },
+              {
+                name  = "AZURE_OPENAI_CHATGPT_MODEL"
                 value = "${var.chat_gpt_model}"
               },
               {
-                name  = "SemanticMemory__Services__AzureOpenAIText__Endpoint"
-                value = "https://${var.openai_service_name}.openai.azure.com/"
+                name  = "AZURE_OPENAI_CHATGPT_DEPLOYMENT"
+                value = "${var.chat_gpt_deployment}"
               },
               {
-                name  = "SemanticMemory__Services__AzureOpenAIText__Deployment"
-                value = "${var.chat_gpt_model}"
-              },
-              {
-                name  = "SemanticMemory__Services__AzureOpenAIText__Auth"
-                value = "AzureIdentity"
-              },
-              {
-                name  = "SemanticMemory__Services__AzureOpenAIEmbedding__Endpoint"
-                value = "https://${var.openai_service_name}.openai.azure.com/"
-              },
-              {
-                name  = "SemanticMemory__Services__AzureOpenAIEmbedding__Deployment"
+                name  = "AZURE_OPENAI_EMB_MODEL_NAME"
                 value = "${var.embeddings_model}"
               },
               {
-                name  = "SemanticMemory__Services__AzureOpenAIEmbedding__Auth"
-                value = "AzureIdentity"
+                name  = "AZURE_OPENAI_EMB_DEPLOYMENT"
+                value = "${var.embeddings_deployment}"
+              },
+              {
+                name  = "AZURE_OPENAI_SERVICE"
+                value = "${var.openai_endpoint}"
               },
               {
                 name  = "AZURE_TENANT_ID"
@@ -88,6 +90,10 @@ resource "azapi_resource" "ca_webapi" {
                 name  = "AZURE_CLIENT_ID"
                 value = "${var.managed_identity_client_id}"
               },
+              {
+                name  = "APP_LOG_LEVEL"
+                value = "DEBUG"
+              }
             ],
           },
         ]
