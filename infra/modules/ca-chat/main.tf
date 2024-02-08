@@ -2,7 +2,7 @@ resource "azapi_resource" "ca_back" {
   name      = var.ca_name
   location  = var.location
   parent_id = var.resource_group_id
-  type      = "Microsoft.App/containerApps@2022-11-01-preview"
+  type      = "Microsoft.App/containerApps@2023-05-01"
   identity {
     type = "UserAssigned"
     identity_ids = [
