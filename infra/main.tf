@@ -127,15 +127,15 @@ module "openai" {
 }
 
 module "cog" {
-  source                  = "./modules/cog"
-  location                = azurerm_resource_group.rg.location
-  resource_group_name     = azurerm_resource_group.rg.name
-  resource_group_id       = azurerm_resource_group.rg.id
-  principal_id            = module.mi.principal_id
-  bing_name               = local.bing_name
-  cognitive_services_name = local.cognitive_services_name
-  content_safety_name     = local.content_safety_name
-  speech_name             = local.speech_name
+  source                             = "./modules/cog"
+  location                           = azurerm_resource_group.rg.location
+  resource_group_name                = azurerm_resource_group.rg.name
+  resource_group_id                  = azurerm_resource_group.rg.id
+  bing_name                          = local.bing_name
+  cognitive_services_name            = local.cognitive_services_name
+  content_safety_name                = local.content_safety_name
+  speech_name                        = local.speech_name
+  content_safety_storage_resource_id = module.st.storage_account_id
 }
 
 module "cae" {

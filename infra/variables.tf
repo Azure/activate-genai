@@ -99,11 +99,11 @@ variable "use_random_suffix" {
 }
 
 variable "enable_entra_id_authentication" {
-  default = false
+  default = true
 }
 
 variable "enable_apim" {
-  default = false
+  default = true
 }
 
 variable "bing_key" {

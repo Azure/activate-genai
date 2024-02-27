@@ -99,12 +99,20 @@ resource "azapi_resource" "ca_back" {
                 value = ""
               },
               {
+                name  = "BrandAnalyzer__DeploymentName",
+                value = "DemoBuild"
+              },
+              {
                 name  = "CallCenter__OpenAIEndpoint",
                 value = "${var.openai_endpoint}"
               },
               {
                 name  = "CallCenter__OpenAISubscriptionKey",
                 value = ""
+              },
+              {
+                name  = "CallCenter__DeploymentName",
+                value = "DemoBuild"
               },
               {
                 name  = "ImageAnalyzer__VisionEndpoint",
@@ -131,6 +139,10 @@ resource "azapi_resource" "ca_back" {
                 value = "image-analyzer"
               },
               {
+                name  = "ImageAnalyzer__DeploymentName",
+                value = "DemoBuild"
+              },
+              {
                 name  = "FormAnalyzer__FormRecogEndpoint",
                 value = "${var.cognitive_service_endpoint}formrecognizer/documentModels/prebuilt-layout:analyze?api-version=2023-07-31"
               },
@@ -149,6 +161,10 @@ resource "azapi_resource" "ca_back" {
               {
                 name  = "FormAnalyzer__ContainerName",
                 value = "form-analyzer"
+              },
+              {
+                name  = "FormAnalyzer__DeploymentName",
+                value = "DemoBuild"
               },
               {
                 name      = "Storage__ConnectionString",

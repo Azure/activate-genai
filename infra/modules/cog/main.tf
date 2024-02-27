@@ -6,6 +6,9 @@ resource "azurerm_cognitive_account" "content_safety" {
   resource_group_name           = var.resource_group_name
   public_network_access_enabled = true
   custom_subdomain_name         = var.content_safety_name
+  identity {
+    type = "SystemAssigned"
+  }
 }
 
 resource "azurerm_cognitive_account" "cognitive" {
@@ -47,10 +50,8 @@ resource "azapi_resource" "bing" {
   response_export_values = ["properties.endpoint"]
 }
 
-
-
-# resource "azurerm_role_assignment" "openai_user" {
-#   scope                = azurerm_cognitive_account.openai.id
-#   role_definition_name = "Cognitive Services OpenAI User"
-#   principal_id         = var.principal_id
-# }
+resource "azurerm_role_assignment" "reader" {
+  scope                = var.content_safety_storage_resource_id
+  role_definition_name = "Storage Blob Data Reader"
+  principal_id         = azurerm_cognitive_account.content_safety.identity[0].principal_id
+}

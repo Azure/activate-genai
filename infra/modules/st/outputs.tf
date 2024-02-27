@@ -13,3 +13,7 @@ output "connection_string" {
 output "key" {
   value = azurerm_storage_account.sa.primary_access_key
 }
+
+output "storage_account_id" {
+  value = azurerm_storage_account.sa.id
+}
