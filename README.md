@@ -1,3 +1,7 @@
+# ARCHIVED
+
+All **Activate GenAI with Azure** features are now part of the **[Azure AIHub project](https://aka.ms/aihub)** 
+
 # Activate GenAI with Azure
 
 This delivery guide will help you build a ChatGPT-like experiences over your Enterprise data using the Retrieval Augmented Generation pattern. 
