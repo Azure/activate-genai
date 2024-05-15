@@ -19,7 +19,7 @@ variable "azopenai_name" {
 }
 
 variable "search_name" {
-  default = "srch-activate-genai"
+  default = "search-activate-genai"
 }
 
 variable "form_recognizer_name" {
