@@ -1,5 +1,12 @@
 Write-Host "Environment variables set."
 
+choco install rust -y
+
+
+rustc --version
+
+python.exe -m pip install --upgrade pip
+
 $pythonCmd = Get-Command python -ErrorAction SilentlyContinue
 if (-not $pythonCmd) {
   # fallback to python3 if python not found
