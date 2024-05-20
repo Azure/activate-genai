@@ -15,7 +15,7 @@ variable "log_name" {
 }
 
 variable "azopenai_name" {
-  default = "cog-openai-activate-genai1"
+  default = "cog-openai-activate-genai"
 }
 
 variable "search_name" {
@@ -23,7 +23,7 @@ variable "search_name" {
 }
 
 variable "form_recognizer_name" {
-  default = "cog-forms-activate-genai1"
+  default = "cog-forms-activate-genai"
 }
 
 variable "storage_account_name" {
