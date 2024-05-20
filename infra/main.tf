@@ -12,6 +12,10 @@ resource "azurerm_resource_group" "rg" {
 locals {
   name_sufix           = substr(lower(random_id.random.hex), 1, 4)
   storage_account_name = "${var.storage_account_name}${local.name_sufix}"
+  search_name = "${var.search_name}${local.name_sufix}"
+  form_recognizer_name = "${var.form_recognizer_name}${local.name_sufix}"
+  azopenai_name = "${var.azopenai_name}${local.name_sufix}"
+
 }
 
 module "vnet" {
@@ -68,7 +72,7 @@ module "search" {
   source              = "./modules/search"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  search_name         = var.search_name
+  search_name         = local.search_name
   principal_id        = module.mi.principal_id
 }
 
@@ -76,7 +80,7 @@ module "form_recognizer" {
   source               = "./modules/form"
   location             = azurerm_resource_group.rg.location
   resource_group_name  = azurerm_resource_group.rg.name
-  form_recognizer_name = var.form_recognizer_name
+  form_recognizer_name = local.form_recognizer_name
 }
 
 module "log" {
@@ -107,7 +111,7 @@ module "openai" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   secondary_location  = var.secondary_location
-  azopenai_name       = var.azopenai_name
+  azopenai_name       = local.azopenai_name
   principal_id        = module.mi.principal_id
 }
 
