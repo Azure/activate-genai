@@ -48,8 +48,8 @@ module "apim" {
   enable_apim              = var.enable_apim
   appi_resource_id         = module.appi.appi_id
   appi_instrumentation_key = module.appi.appi_key
-  openai_service_name      = module.openai.openai_service_name
-  openai_service_endpoint  = module.openai.openai_endpoint
+  openai_service_name      ="test"
+  openai_service_endpoint  = "test"
   tenant_id                = data.azurerm_subscription.current.tenant_id
 
   depends_on = [module.nsg]
@@ -68,20 +68,6 @@ resource "azurerm_role_assignment" "id_reader" {
   principal_id         = module.mi.principal_id
 }
 
-module "search" {
-  source              = "./modules/search"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  search_name         = local.search_name
-  principal_id        = module.mi.principal_id
-}
-
-module "form_recognizer" {
-  source               = "./modules/form"
-  location             = azurerm_resource_group.rg.location
-  resource_group_name  = azurerm_resource_group.rg.name
-  form_recognizer_name = local.form_recognizer_name
-}
 
 module "log" {
   source              = "./modules/log"
@@ -98,22 +84,8 @@ module "appi" {
   log_id              = module.log.log_id
 }
 
-module "st" {
-  source               = "./modules/st"
-  location             = azurerm_resource_group.rg.location
-  resource_group_name  = azurerm_resource_group.rg.name
-  storage_account_name = local.storage_account_name
-  principal_id         = module.mi.principal_id
-}
 
-module "openai" {
-  source              = "./modules/openai"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  secondary_location  = var.secondary_location
-  azopenai_name       = local.azopenai_name
-  principal_id        = module.mi.principal_id
-}
+
 
 module "cae" {
   source            = "./modules/cae"
@@ -133,15 +105,15 @@ module "ca_back" {
   ca_name                        = var.ca_back_name
   cae_id                         = module.cae.cae_id
   managed_identity_id            = module.mi.mi_id
-  chat_gpt_deployment            = module.openai.gpt_deployment_name
-  chat_gpt_model                 = module.openai.gpt_deployment_name
-  embeddings_deployment          = module.openai.embedding_deployment_name
-  embeddings_model               = module.openai.embedding_deployment_name
-  storage_account_name           = module.st.storage_account_name
-  storage_container_name         = module.st.storage_container_name
-  search_service_name            = module.search.search_service_name
-  search_index_name              = module.search.search_index_name
-  openai_service_name            = var.enable_apim ? module.apim.gateway_url : module.openai.openai_endpoint
+  chat_gpt_deployment            = "test"
+  chat_gpt_model                 = "test"
+  embeddings_deployment          = "test"
+  embeddings_model               = "test"
+  storage_account_name           = "test"
+  storage_container_name         ="test"
+  search_service_name            ="test"
+  search_index_name              = "test"
+  openai_service_name            = "test"
   tenant_id                      = data.azurerm_subscription.current.tenant_id
   managed_identity_client_id     = module.mi.client_id
   enable_entra_id_authentication = var.enable_entra_id_authentication
@@ -156,11 +128,11 @@ module "ca_back" {
 #   cae_default_domain         = module.cae.defaultDomain
 #   ca_webapp_name             = var.ca_webapp_name
 #   managed_identity_id        = module.mi.mi_id
-#   chat_gpt_deployment        = module.openai.gpt_deployment_name
-#   chat_gpt_model             = module.openai.gpt_deployment_name
-#   embeddings_deployment      = module.openai.embedding_deployment_name
-#   embeddings_model           = module.openai.embedding_deployment_name
-#   storage_account_name       = module.st.storage_account_name
+#   chat_gpt_deployment        = "test"
+#   chat_gpt_model             = "test"
+#   embeddings_deployment      = "test"
+#   embeddings_model           = "test"
+#   storage_account_name       = "test"
 #   storage_container_name     = module.st.storage_container_name
 #   search_service_name        = module.search.search_service_name
 #   search_index_name          = module.search.search_index_name
